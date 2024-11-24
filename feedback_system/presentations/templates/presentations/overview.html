@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentation Feedback</title>
+    {% load static %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+          
+        background-image: linear-gradient(
+            rgba(34, 34, 34, 0.6),
+            rgba(34, 34, 34, 0.6)
+          ),
+          url("{% static 'images/hero.jpg' %}");
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 80%;
+            max-width: 1200px;
+            margin: 50px auto;
+            overflow: hidden;
+        }
+
+        .carousel-wrapper {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .score-box {
+            flex: 0 0 100%;
+            box-sizing: border-box;
+            padding: 20px;
+            margin: 0 10px;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            min-height: 350px;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .score-box:hover {
+            transform: scale(1.03);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .score-box h2 {
+            margin: 0;
+            color: #333;
+            font-size: 1.6em;
+            border-bottom: 2px solid #0277bd;
+            padding-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .score-box p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .suggestions {
+            margin-top: 20px;
+        }
+
+        .suggestions h3 {
+            margin: 0;
+            color: #333;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .score-box ul {
+            padding: 0;
+            list-style-type: none;
+        }
+
+        .score-box ul li {
+            background: #e1f5fe;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            color: #0277bd;
+            font-size: 0.9em;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .carousel-button {
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: #fff;
+            font-size: 2em;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+            pointer-events: auto;
+        }
+
+        .carousel-button:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+    .score-box {
+        padding: 50px;
+      }
+      .suggestions ul li {
+        margin-bottom: 8px;
+        width: 400px;
+        font-weight: 700px;
+      }
+      .carousel-container {
+        width: 900px;
+        
+        background: linear-gradient(
+          to right,
+          #fefbd8 0%,
+          #b2b2b2 50%,
+          #f4e1d2 100%
+        );
+      }
+      .score-box{
+        background: linear-gradient(
+          to right,
+          #fefbd8 0%,
+          #b2b2b2 50%,
+          #f4e1d2 100%
+        );
+      }
+      .score-box p {
+        font-weight: 1200px;
+        color: black;
+        font-size: 15px;
+      }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .score-box {
+                flex: 0 0 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <div class="carousel-wrapper">
+            <div class="score-box">
+                <h2>Gesture Score</h2>
+                <p><strong>Score:</strong> {{ feedback.gesture_score}}%</p>
+                <p><strong>Explanation:</strong> The gesture score is calculated based on the variety, frequency, and appropriateness of hand movements. Effective gestures include purposeful movements that highlight key points, avoid repetitive actions, and engage the audience by using natural and confident gestures.</p>
+                <div class="suggestions">
+                    <h3>Suggestions for Improvement</h3>
+                    <ul>
+                        <li>Incorporate diverse hand gestures to emphasize key points.</li>
+                        <li>Avoid repetitive gestures and ensure they match the context.</li>
+                        <li>Practice gestures to ensure they appear natural and confident.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="score-box">
+                <h2>Posture Score</h2>
+                <p><strong>Score:</strong> {{ feedback.posture_score }}%</p>
+                <p><strong>Explanation:</strong> The posture score is based on the speaker's stance, balance, and alignment. Proper posture involves standing upright with shoulders back, maintaining an open stance to convey confidence, and avoiding slouching or shifting weight excessively.</p>
+                <div class="suggestions">
+                    <h3>Suggestions for Improvement</h3>
+                    <ul>
+                        <li>Maintain a tall stance with shoulders back to convey confidence.</li>
+                        <li>Avoid slouching and shifting weight too much.</li>
+                        <li>Practice standing still with a balanced posture during presentations.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="score-box">
+                <h2>Volume Score</h2>
+                <p><strong>Score:</strong> {{ feedback.volume_score }}%</p>
+                <p><strong>Explanation:</strong> The volume score assesses how well the speaker projects their voice. Effective volume involves speaking loudly enough to be heard by the entire audience without straining, varying volume to emphasize important points, and avoiding speaking too softly or too loudly.</p>
+                <div class="suggestions">
+                    <h3>Suggestions for Improvement</h3>
+                    <ul>
+                        <li>Practice projecting your voice to ensure it reaches all listeners.</li>
+                        <li>Vary your volume to highlight key points and maintain interest.</li>
+                        <li>Avoid speaking too softly or excessively loudly.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="score-box">
+                <h2>Pace Score</h2>
+                <p><strong>Score:</strong> {{ feedback.pace_score }}%</p>
+                <p><strong>Explanation:</strong> The pace score evaluates the speed of the presentation. An optimal pace involves speaking neither too quickly nor too slowly, allowing the audience to follow along without feeling rushed or bored. Effective pacing includes strategic pauses and maintaining a rhythm that keeps the audience engaged.</p>
+                <div class="suggestions">
+                    <h3>Suggestions for Improvement</h3>
+                    <ul>
+                        <li>Maintain a steady pace with deliberate pauses for emphasis.</li>
+                        <li>Avoid speaking too quickly or dragging out points unnecessarily.</li>
+                        <li>Practice pacing to ensure it aligns with the content and audience engagement.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="score-box">
+                <h2>Expressions Score</h2>
+                <p><strong>Score:</strong> {{ feedback.emotion_score }}%</p>
+                <p><strong>Explanation:</strong> The Expressions score measures how well the speaker conveys emotions through facial expressions and tone. Effective emotion involves using varied facial expressions and vocal tones to connect with the audience, enhance engagement, and emphasize key messages.</p>
+                <div class="suggestions">
+                    <h3>Suggestions for Improvement</h3>
+                    <ul>
+                        <li>Incorporate diverse facial expressions to convey emotions effectively.</li>
+                        <li>Use vocal tone variations to match the message and engage the audience.</li>
+                        <li>Practice emotional expressions to ensure they are natural and impactful.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="score-box">
+                <h2>Overall Score</h2>
+                <p><strong>Score:</strong> {{ feedback.overall_score }}%</p>
+                <p><strong>Explanation:</strong> The overall score combines individual scores to provide a comprehensive assessment of the presentation's effectiveness. It reflects the speaker's overall performance, including their gestures, posture, volume, pace, and emotional engagement.</p>
+                <div class="suggestions">
+                    <h3>Suggestions for Improvement</h3>
+                    <ul>
+                        <li>Review feedback from each category to identify areas for improvement.</li>
+                        <li>Focus on refining gestures, posture, volume, pace, and emotional expression.</li>
+                        <li>Practice integrating all elements for a cohesive and effective presentation.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-controls">
+            <button class="carousel-button" id="prev">&#10094;</button>
+            <button class="carousel-button" id="next">&#10095;</button>
+        </div>
+    </div>
+
+    <script>
+        const wrapper = document.querySelector('.carousel-wrapper');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+        let index = 0;
+        const items = document.querySelectorAll('.score-box').length;
+        const width = 103; // percentage width of each item
+
+        function updateCarousel() {
+            const offset = -index * width;
+            wrapper.style.transform = `translateX(${offset}%)`;
+        }
+
+        nextButton.addEventListener('click', () => {
+            index = (index + 1) % items;
+            updateCarousel();
+        });
+
+        prevButton.addEventListener('click', () => {
+            index = (index - 1 + items) % items;
+            updateCarousel();
+        });
+
+        // Optional: Auto-slide every 5 seconds
+        setInterval(() => {
+            nextButton.click();
+        }, 5000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Presentation</title>
+    {% load static %}
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(rgba(35, 37, 41, 0.3), rgba(46, 49, 51, 0.3)), 
+                        url('{% static "images/imag1.png" %}') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+            animation: shadow-pulse 3s infinite;
+        }
+        @keyframes shadow-pulse {
+            0% {
+                box-shadow: 0 0 20px rgba(71, 75, 80, 0.5), 0 0 40px rgba(66, 69, 73, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(62, 65, 68, 0.7), 0 0 60px rgba(36, 39, 43, 0.7);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(53, 55, 58, 0.5), 0 0 40px rgba(42, 43, 44, 0.5);
+            }
+        }
+        h1 {
+            margin-bottom: 25px;
+            color: #0d0d0e;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form input[type="file"] {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+        form input[type="file"]:hover {
+            border-color: #007bff;
+        }
+        form button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        form button:hover {
+            background-color: #0056b3;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input:focus {
+            border-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload Video Presentation</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+</body>
+</html>
